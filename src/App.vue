@@ -1,18 +1,17 @@
 <template>
   <main>
     <div v-if="showWelcomeScreen" class="welcome-screen">
-      <img src="./assets/title_screen.png" alt="Welcome to the Social Media Quiz!" class="main-title-image">
-      <img src="./assets/play_button.png" alt="Start Quiz" class="start-button-image" @click="startQuiz" style="cursor: pointer;">
+      <img src="./assets/title_screen.svg" alt="Welcome to the Social Media Quiz!, Start Quiz" class="main-title-and-start-button-image" @click="startQuiz" style="cursor: pointer;">
     </div>
     <template v-else>
-      <h1>Quiz Title</h1>
       <Question
         v-if="currentQuestionIndex < questions.length"
         :questionText="questions[currentQuestionIndex].text"
+        :questionImage="questions[currentQuestionIndex].image"
         @answerSelected="handleAnswer"
       />
       <ResultCard v-else-if="result" :title="result.title" :description="result.description" />
-      <p v-else>Quiz Finished - Calculating Results...</p>
+      <p v-else>Quiz finalizado <br> Calculando resultados... <br> (Puntaje de cada uno) <br> {{ scores }}</p>
     </template>
   </main>
 </template>
@@ -24,16 +23,29 @@ import ResultCard from './components/ResultCard.vue';
 
 const showWelcomeScreen = ref(true);
 const questions = ref([
-  { text: 'Do you enjoy spending time in large groups?', yesPoints: { extroversion: 1 }, noPoints: { introversion: 1 } },
-  { text: 'Do you often initiate conversations?', yesPoints: { extroversion: 1 }, noPoints: { introversion: 1 } },
-  // Add more questions
+  { text: '1', image: '/questions/question1.svg', yesPoints: { instagram: 1, tiktok: 1, facebook: 1, snapchat: 1 }, noPoints: { nope: 1 } },
+  { text: '2', image: '/questions/question2.svg', yesPoints: { facebook: 1, xtwitter: 1 }, noPoints: { nope: 1 } },
+  { text: '3', image: '/questions/question3.svg', yesPoints: { spotify: 1, youtube: 1 }, noPoints: { nope: 1 } },
+  { text: '4', image: '/questions/question4.svg', yesPoints: { twitch: 1, wassap: 1, xtwitter: 1, tiktok: 1 }, noPoints: { nope: 1 } },
+  { text: '5', image: '/questions/question5.svg', yesPoints: { pinterest: 1, instagram: 1 }, noPoints: { nope: 1 } },
+  { text: '6', image: '/questions/question6.svg', yesPoints: { tinder: 1, instagram: 1 }, noPoints: { nope: 1 } },
+  { text: '7', image: '/questions/question7.svg', yesPoints: { twitch: 1, youtube: 1, tiktok: 1 }, noPoints: { nope: 1 } },
 ]);
 
 const currentQuestionIndex = ref(0);
 const scores = ref({
-  extroversion: 0,
-  introversion: 0,
-  // Add more variables based on your quiz
+  instagram: 0,
+  tiktok: 0,
+  facebook: 0,
+  snapchat: 0,
+  xtwitter: 0,
+  spotify: 0,
+  youtube: 0,
+  twitch: 0,
+  wassap: 0,
+  pinterest: 0,
+  tinder: 0,
+  nope: 0
 });
 const result = ref(null);
 
@@ -57,6 +69,7 @@ const handleAnswer = (answer) => {
 
   if (currentQuestionIndex.value === questions.value.length) {
     calculateResult();
+    console.log(scores)
   }
 };
 
@@ -67,7 +80,6 @@ const calculateResult = () => {
   const resultsData = [
     { variable: 'extroversion', title: 'The Social Butterfly', description: 'You thrive in social settings...' },
     { variable: 'introversion', title: 'The Reflective Soul', description: 'You appreciate quiet time and introspection...' },
-    // Add more result info card data
   ];
 
   for (const resultOption of resultsData) {
@@ -88,8 +100,8 @@ main {
   padding: 20px;
 }
 
-.start-button-image {
-  margin-top: 90px;
+.main-title-and-start-button-image {
+  width: 100%;
   cursor: pointer;
 }
 
@@ -98,7 +110,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px; /* Adjust as needed */
+  height: 300px;
 }
 
 .welcome-screen h1 {

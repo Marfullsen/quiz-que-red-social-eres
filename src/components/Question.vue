@@ -1,9 +1,11 @@
 <template>
   <div class="question-container">
-    <h2>{{ questionText }}</h2>
-    <div class="answers">
-      <button @click="selectAnswer('yes')">Yes</button>
-      <button @click="selectAnswer('no')">No</button>
+    <img :src="questionImage" :alt="questionText" class="question-image">
+    <div class="answers-container">
+      <div class="answers-buttons">
+        <img src="/yes.png" alt="Si" class="yes-button-image" @click="selectAnswer('yes')" style="cursor: pointer;">
+        <img src="/no.png" alt="No" class="no-button-image" @click="selectAnswer('no')" style="cursor: pointer;">
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +15,7 @@ import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
   questionText: String,
+  questionImage: String,
 });
 
 const emit = defineEmits(['answerSelected']);
@@ -23,11 +26,27 @@ const selectAnswer = (answer) => {
 </script>
 
 <style scoped>
-/* Basic styling, will be refined later */
+
 .question-container {
-  /* Styles from your Canva design */
+  color: beige;
 }
-.answers button {
-  /* Styles for your buttons */
+
+.answers-container {
+  position: absolute;
+  left: 40%;
+  bottom: 15%;
 }
+
+.answers-buttons {
+  display: flex ;
+}
+
+.no-button-image {
+  margin-left: 50px
+}
+
+.question-image {
+  width: 70%;
+}
+
 </style>

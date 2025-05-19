@@ -11,13 +11,11 @@ import { defineProps } from 'vue';
 defineProps({
   title: String,
   description: String,
-  // Add props for any images or other data
 });
 </script>
 
 <style scoped>
-/* Styles for your result card */
 .result-card {
-  /* Styles from your Canva design */
+  /* Styles here */
 }
 </style>
