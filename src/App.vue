@@ -1,8 +1,8 @@
 <template>
   <main>
     <div v-if="showWelcomeScreen" class="welcome-screen">
-      <h1>Welcome to the Social Media Quiz!</h1>
-      <button @click="startQuiz">Start Quiz</button>
+      <img src="./assets/title_screen.png" alt="Welcome to the Social Media Quiz!" class="main-title-image">
+      <img src="./assets/play_button.png" alt="Start Quiz" class="start-button-image" @click="startQuiz" style="cursor: pointer;">
     </div>
     <template v-else>
       <h1>Quiz Title</h1>
@@ -86,6 +86,11 @@ main {
   font-family: sans-serif;
   text-align: center;
   padding: 20px;
+}
+
+.start-button-image {
+  margin-top: 90px;
+  cursor: pointer;
 }
 
 .welcome-screen {
